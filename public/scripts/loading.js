@@ -10,7 +10,7 @@
         html,
         body,
         #root {
-          height: 100%;
+          height: 1000%;
           margin: 0;
           padding: 0;
         }
