@@ -8,6 +8,11 @@ export default [
     ],
   },
   { path: '/welcome', icon: 'smile', component: './Welcome' },
+  { path: '/', redirect: '/add_chart'},
+  { path: '/add_chart', name: '智能分析', icon: 'barChart', component: './AddChart' },
+
+
+  // { path: '/welcome', icon: 'smile', component: './Welcome' },
   {
     path: '/admin',
     icon: 'crown',
@@ -17,7 +22,6 @@ export default [
       { path: '/admin/sub-page', component: './Admin' },
     ],
   },
-  { icon: 'table', path: '/list', component: './TableList' },
   { path: '/', redirect: '/welcome' },
   { path: '*', layout: false, component: './404' },
 ];

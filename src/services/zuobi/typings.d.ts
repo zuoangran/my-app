@@ -1,4 +1,10 @@
 declare namespace API {
+  type BaseResponseBiResponse_ = {
+    code?: number;
+    data?: BiResponse;
+    message?: string;
+  };
+
   type BaseResponseBoolean_ = {
     code?: number;
     data?: boolean;
@@ -77,6 +83,11 @@ declare namespace API {
     message?: string;
   };
 
+  type BiResponse = {
+    genChart?: string;
+    genResult?: string;
+  };
+
   type Chart = {
     charDate?: string;
     charType?: string;
@@ -86,6 +97,7 @@ declare namespace API {
     goal?: string;
     id?: number;
     isDelete?: number;
+    name?: string;
     updateTime?: string;
     userId?: number;
   };
@@ -94,6 +106,7 @@ declare namespace API {
     charDate?: string;
     charType?: string;
     goal?: string;
+    name?: string;
   };
 
   type ChartEditRequest = {
@@ -101,6 +114,7 @@ declare namespace API {
     charType?: string;
     goal?: string;
     id?: number;
+    name?: string;
   };
 
   type ChartQueryRequest = {
@@ -108,6 +122,7 @@ declare namespace API {
     current?: number;
     goal?: string;
     id?: number;
+    name?: string;
     pageSize?: number;
     sortField?: string;
     sortOrder?: string;
@@ -123,11 +138,18 @@ declare namespace API {
     goal?: string;
     id?: number;
     isDelete?: number;
+    name?: string;
     updateTime?: string;
   };
 
   type DeleteRequest = {
     id?: number;
+  };
+
+  type genChartByAiUsingPOSTParams = {
+    charType?: string;
+    goal?: string;
+    name?: string;
   };
 
   type getChartByIdUsingGETParams = {
@@ -311,13 +333,6 @@ declare namespace API {
   type UserLoginRequest = {
     userAccount?: string;
     userPassword?: string;
-  };
-
-  type RegisterParams = {
-    userAccount?: string;
-    userPassword?: string;
-    checkPassword?: string;
-    type?: string;
   };
 
   type UserQueryRequest = {
