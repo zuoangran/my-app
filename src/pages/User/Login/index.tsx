@@ -1,21 +1,19 @@
 import Footer from '@/components/Footer';
-// import { login } from '@/services/ant-design-pro/api';
+import { Button } from 'antd';
 
-// import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+
+
 import { listChartByPageUsingPOST } from '@/services/zuobi/chartController';
 import { getLoginUserUsingGET, userLoginUsingPOST } from '@/services/zuobi/userController';
 import {
   AlipayCircleOutlined,
   LockOutlined,
-  // MobileOutlined,
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
 import {
   LoginForm,
-  // ProFormCaptcha,
-  // ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
@@ -145,11 +143,9 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo" src="/logo.svg" />}
-          title="鱼智能 BI"
+          title="渝智能 BI"
           subTitle={
-            <a href="https://yupi.icu" target="_blank">
-              编程导航知识星球的原创项目
-            </a>
+              "会数据分析的智能平台"
           }
           onFinish={async (values) => {
             await handleSubmit(values as API.UserLoginRequest);
@@ -201,12 +197,13 @@ const Login: React.FC = () => {
           )}
 
           <div
-            style={{
-              marginBottom: 24,
-            }}
+            style={{textAlign: 'center', marginBottom: '20px'}}
           >
-            <Link to="/user/register">注册</Link>
-          </div>
+            <Link to="/user/register">  <Button type="primary" block style={{height: '40px'}}>
+              新用户注册
+            </Button></Link>
+
+          </div >
         </LoginForm>
       </div>
       <Footer />

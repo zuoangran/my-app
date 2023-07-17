@@ -1,7 +1,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {listMyChartByPageUsingPOST} from "@/services/zuobi/chartController";
-import {Avatar, Card, List, message} from "antd";
+import {Avatar, Card, List, message, Result} from "antd";
 import ReactECharts from "echarts-for-react";
 import {useModel} from "@umijs/max";
 import Search from "antd/es/input/Search";
@@ -15,6 +15,8 @@ const MyChartPage: React.FC = () => {
   const initSearchParams={
     current: 1,
     pageSize:4,
+    sortField:'createTime',
+    sortOrder:'desc',
   }
 
   const [searchParams,setSearchParams]=useState<API.ChartQueryRequest>({...initSearchParams});
@@ -33,11 +35,12 @@ const loadDate= async ()=>{
       //去掉图标的标题
       if(res.data.records){
         res.data.records.forEach(data=>{
+          if(data.status==='succeed'){
           const chartOption=JSON.parse(data.genChart ?? '{}');
           //把标题设为undefined
           chartOption.title=undefined;
           //然后把修改后的数据转化为json设置回去
-          data.genChart=JSON.stringify(chartOption);
+          data.genChart=JSON.stringify(chartOption);}
         })
       }
 
@@ -109,10 +112,52 @@ useEffect(()=>{
                 title={item.name}
                 description={item.charType ? ('图表类型: '+item.charType):undefined}
               />
-              <div style={{marginBottom: 16}}/>
-              <p>{"分析目标: "+item.goal}</p>
-              <div style={{marginBottom: 16}}/>
-                <ReactECharts option={item.genChart && JSON.parse(item.genChart)}/>
+              <>
+                {
+                      item.status === 'succeed' &&<>
+                    <div style={{marginBottom: 16}}/>
+                    <p>{"分析目标: "+item.goal}</p>
+                    <div style={{marginBottom: 16}}/>
+                    <ReactECharts option={item.genChart && JSON.parse(item.genChart)}/>
+
+                  </>
+                }
+                {
+                  item.status==='wait'&&<>
+                    <Result
+                      status="warning"
+                      title="待生成"
+                      subTitle={item.execMessage ?? '欢迎开通vip,高速生成不排队'}
+                    />
+
+
+                  </>
+                }
+
+                {
+                  item.status==='running'&&<>
+                    <Result
+                      status="info"
+                      title="图表生成中"
+                      subTitle={item.execMessage}
+                    />
+
+
+                  </>
+                }
+                {
+                  item.status==='failed'&&<>
+                    <Result
+                      status="error"
+                      title="图表生成失败"
+                      subTitle={item.execMessage}
+                      />
+
+
+                    </>
+                }
+              </>
+
             </Card>
 
           </List.Item>
