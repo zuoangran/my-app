@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import Footer from '@/components/Footer';
 import { Question } from '@/components/RightContent';
 import { LinkOutlined } from '@ant-design/icons';
@@ -19,7 +21,9 @@ const loginPath = '/user/login';
  * */
 export async function getInitialState(): Promise<{
   currentUser?: API.LoginUserVO;
-}> {
+}>
+
+{
   const fetchUserInfo = async () => {
     try {
       const res = await getLoginUserUsingGET();
