@@ -1,3 +1,5 @@
+
+
 // https://umijs.org/config/
 import { defineConfig } from '@umijs/max';
 import defaultSettings from './defaultSettings';
@@ -146,3 +148,8 @@ export default defineConfig({
   requestRecord: {},
   exportStatic: {},
 });
+
+
+
+
+
