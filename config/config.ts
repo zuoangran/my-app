@@ -129,7 +129,7 @@ export default defineConfig({
     {
       requestLibPath: "import { request } from '@umijs/max'",
       // 或者使用在线的版本
-      schemaPath: 'http://:8080/api/v2/api-docs',
+      schemaPath: 'http://localhost:8080/api/v2/api-docs',
       projectName: 'zuobi',
       // schemaPath: join(__dirname, 'oneapi.json'),
       mock: false,
